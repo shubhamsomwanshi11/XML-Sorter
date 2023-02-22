@@ -13,7 +13,14 @@ function sortXML(xml) {
 }
 
 function SortData() {
-  const xmlString = document.getElementById('inputarea').value.toString();
+  let xmlString = document.getElementById('inputarea').value.toString();
+  if (xmlString.includes('<root>') && xmlString.includes('</root>')) {
+    // Input string already contains <root> and </root>, so return as is
+    xmlString = xmlString;
+  } else {
+    // Input string does not contain <root> and </root>, so add them
+    xmlString = '<root>' + xmlString + '</root>';
+  }
   const parser = new DOMParser();
   const xml = parser.parseFromString(xmlString, "application/xml");
   if (xml.getElementsByTagName("parsererror").length > 0) {
