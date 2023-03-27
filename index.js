@@ -11,7 +11,7 @@ function sortXML(xml) {
   }
   return xml;
 }
-
+    
 function SortData() {
   let xmlString = document.getElementById('inputarea').value.toString();
   if (xmlString.includes('<root>') && xmlString.includes('</root>')) {
@@ -28,8 +28,9 @@ function SortData() {
   }
   else {
     const sortedXml = sortXML(xml);
-    console.log(sortedXml.documentElement.outerHTML);
-    var formatted = formatXml(sortedXml.documentElement.outerHTML);
+    var newstr = sortedXml.documentElement.outerHTML;
+    let removed = newstr.replace(/<\/?root>/g, '');
+    var formatted = formatXml(removed);
     document.getElementById('outputarea').value = formatted;
   }
 }
@@ -66,4 +67,3 @@ function highlightXmlTags(textBoxId) {
   const textBox = document.getElementById(textBoxId);
   hljs.highlightBlock(textBox);
 }
-
